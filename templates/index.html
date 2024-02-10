@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Report Generator</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Health Report Generator</h1>
+        <center>
+            <div class="tabs">
+                <button id="analyserTab" class="tablink" onclick="openTab('analyser')">Health Report Analyser</button>
+                <button id="scanTab" class="tablink" onclick="openTab('scan')">Scan X-Ray</button>
+                <button id="aboutTab" class="tablink" onclick="openTab('about')">About</button>
+            </div>
+        </center>
+        <center>
+            <div id="analyser" class="tabcontent">
+                <h2>Upload Health Report</h2><br>
+                <input type="file" id="reportInput" accept="image/*"><br><br>
+                <button onclick="submitReport()">Analyse Report</button>
+                <div id="loading" style="display: none;">
+                    <div class="loader"></div>
+                    <p>Analysing person's report...</p>
+                </div>
+                <div id="predictionResult"></div>
+                <div id="suggestions" style="display: none;"></div>
+            </div>
+        </center>
+        <center>
+            <div id="scan" class="tabcontent">
+                <h2>Scan X-Ray</h2>
+                <p style="font-size: 24px;">Coming Soon...</p>
+            </div>
+        </center>
+
+        <div id="about" class="tabcontent">
+            <h2>About</h2>
+            <p>This is a health report generator website designed for predicting if a person has diabetes or not based
+                on their health report image.</p>
+        </div>
+    </div>
+
+    <script src="../static/script.js"></script>
+</body>
+
+</html>
