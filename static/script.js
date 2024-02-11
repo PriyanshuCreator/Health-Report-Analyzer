@@ -56,8 +56,33 @@ function submitReport() {
                 analyserTab.classList.add('diabetes');
                 analyserContent.classList.remove('negative');
                 analyserContent.classList.add('diabetes');
-            } else {
+            }
+            else if (data.prediction == "Patient Does Not have Diabetes") {
+                predictionResultDiv.innerText = data.prediction;
+                // Show suggestions if person has diabetes
+                const suggestionsDiv = document.getElementById('suggestions');
+                suggestionsDiv.innerHTML = `
+                <div style = "background-color : lightgreen;
+                border-radius : 10px">
+                <h2 style="font-size: 28px; padding :10px;  
+                 ">Hurray ! Report is Negative !</h2>
+                <h2>Thanks for Using Our Product!</h2>
+                <br></div>
+                
+            `;
+                suggestionsDiv.style.display = 'block';  // Show suggestions
+                // Change tab background based on prediction result
+                const analyserTab = document.getElementById('analyserTab');
+                const analyserContent = document.getElementById('analyser');
+                analyserTab.classList.remove('diabetes');
+                analyserTab.classList.add('negative');
+                analyserContent.classList.remove('diabetes');
+                analyserContent.classList.add('negative');
+
+            }
+            else {
                 alert(data.error);
+
             }
             loadingDiv.style.display = 'none';
         })

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import pandas as pd
 from ml_model import ml_model, Preprocessiong
 import easyocr
-import cv2
+
 
 app = Flask(__name__)
 
@@ -33,54 +33,75 @@ def extract_patient_data(text):
     except Exception as e:
         return {'error': str(e)}
 
-def extract_patient_age(text):
-    age_index = text.find("Age")
-    if age_index != -1:
-        age_info = text[age_index + 3:].split()
-        if age_info:
-            return int(age_info[0])
+def extract_patient_age(text):  
+    try:
+        age_index = text.find("Age")
+        if age_index != -1:
+            age_info = text[age_index + 3:].split()
+            if age_info:
+                return int(age_info[0])
+    except:
+        return 35
 
 def extract_patient_Glucose(text):
-    glucose_index = text.find("Glucose")
-    if glucose_index != -1:
-        glucose_info = text[glucose_index + 7:].split()
-        if glucose_info:
-            return int(glucose_info[0])
+    try:
+        glucose_index = text.find("Glucose")
+        if glucose_index != -1:
+            glucose_info = text[glucose_index + 7:].split()
+            if glucose_info:
+                return int(glucose_info[0])
+    except:
+        return 0
 
 def extract_patient_Pregnancies(text):
-    Pregnancies_index = text.find('Pregnancies')
-    if Pregnancies_index != -1:
-        Pregnancies_info = text[Pregnancies_index + 11:].split()
-        if Pregnancies_info:
-            return float(Pregnancies_info[0])
+    try:
+        Pregnancies_index = text.find('Pregnancies')
+        if Pregnancies_index != -1:
+            Pregnancies_info = text[Pregnancies_index + 11:].split()
+            if Pregnancies_info:
+                return float(Pregnancies_info[0])
+    except :
+        return 0
 
 def extract_patient_BloodPressure(text):
-    BloodPressure_index = text.find('Pressure')
-    if BloodPressure_index != -1:
-        BloodPressure_info = text[BloodPressure_index + 8:].split()
-        if BloodPressure_info:
-            return int(BloodPressure_info[0])
+    try:
+        BloodPressure_index = text.find('Pressure')
+        if BloodPressure_index != -1:
+            BloodPressure_info = text[BloodPressure_index + 8:].split()
+            if BloodPressure_info:
+                return int(BloodPressure_info[0])
+    except:
+        return 0
 
 def extract_patient_SkinThickness(text):
-    Pregnancies_SkinThickness = text.find('Thickness')
-    if Pregnancies_SkinThickness != -1:
-        SkinThickness_info = text[Pregnancies_SkinThickness + 9:].split()
-        if SkinThickness_info:
-            return int(SkinThickness_info[0])
+    try:
+        Pregnancies_SkinThickness = text.find('Thickness')
+        if Pregnancies_SkinThickness != -1:
+            SkinThickness_info = text[Pregnancies_SkinThickness + 9:].split()
+            if SkinThickness_info:
+                return int(SkinThickness_info[0])
+    except:
+         return 0
 
 def extract_patient_BMI(text):
-    BMI_index = text.find('BMI')
-    if BMI_index != -1:
-        BMI_info = text[BMI_index + 3:].split()
-        if BMI_info:
-            return float(BMI_info[0])
+    try:
+        BMI_index = text.find('BMI')
+        if BMI_index != -1:
+            BMI_info = text[BMI_index + 3:].split()
+            if BMI_info:
+                return float(BMI_info[0])
+    except:
+        return 18.5
 
 def extract_patient_DiabetesPedigreeFunction(text):
-    DiabetesPedigreeFunction_index = text.find('Function')
-    if DiabetesPedigreeFunction_index != -1:
-        DiabetesPedigreeFunction_info = text[DiabetesPedigreeFunction_index + 9:].split()
-        if DiabetesPedigreeFunction_info:
-            return float(DiabetesPedigreeFunction_info[0])
+    try:
+        DiabetesPedigreeFunction_index = text.find('Function')
+        if DiabetesPedigreeFunction_index != -1:
+            DiabetesPedigreeFunction_info = text[DiabetesPedigreeFunction_index + 9:].split()
+            if DiabetesPedigreeFunction_info:
+                return float(DiabetesPedigreeFunction_info[0])
+    except :
+        return 0
 
 @app.route('/')
 def index():
